@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maya Okafor – Data visualization developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#eef1f6; --surface:#ffffff; --ink:#14213d; --muted:#56607a; --line:#cdd5e3;
+  --accent:#2f5bff; --accent-ink:#ffffff; --mark:#ffb627;
+  --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --body:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0f1526;--surface:#182038;--ink:#e9edf8;--muted:#9aa5c2;--line:#2b3556;--accent:#7c9bff;--accent-ink:#0f1526;}
+}
+:root[data-theme="dark"]{--bg:#0f1526;--surface:#182038;--ink:#e9edf8;--muted:#9aa5c2;--line:#2b3556;--accent:#7c9bff;--accent-ink:#0f1526;}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--body)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.5rem}
+header.nav{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.25rem 0}
+.nav a.logo{font:800 1.15rem var(--display);text-decoration:none}
+.nav nav{display:flex;gap:1.25rem;align-items:center}
+.nav nav a{text-decoration:none;color:var(--muted);font-weight:500}
+.nav nav a:hover{color:var(--ink)}
+#theme{background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:.35rem .8rem;font:500 .9rem var(--body);cursor:pointer}
+.hero{padding:2.5rem 0 1rem}
+.hero h1{font:800 clamp(2.6rem,8vw,6rem)/.98 var(--display);letter-spacing:-.03em;margin:0 0 1.25rem;max-width:14ch}
+.hero p.lead{max-width:34rem;color:var(--muted);font-size:1.2rem;margin:0 0 1.75rem}
+.btns{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:.8rem 1.4rem;border-radius:10px;font-weight:600;text-decoration:none;border:2px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer;font-family:var(--body);font-size:1rem}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn:hover{filter:brightness(1.08)}
+#viz{display:block;width:100%;height:clamp(150px,26vw,260px);margin-top:2.5rem;border-bottom:2px solid var(--ink)}
+.viznote{font-size:.9rem;color:var(--muted);margin:.5rem 0 0}
+section{padding:4.5rem 0 0}
+h2{font:800 clamp(1.8rem,4vw,2.6rem)/1.1 var(--display);letter-spacing:-.02em;margin:0 0 1.5rem}
+.work details{border-top:1px solid var(--line)}
+.work details:last-child{border-bottom:1px solid var(--line)}
+.work summary{display:grid;grid-template-columns:1fr auto;gap:.25rem 1rem;align-items:baseline;padding:1.25rem 0;cursor:pointer;list-style:none}
+.work summary::-webkit-details-marker{display:none}
+.work summary h3{margin:0;font:800 1.5rem var(--display);letter-spacing:-.01em}
+.work summary .yr{color:var(--muted);font-variant-numeric:tabular-nums}
+.work summary .tag{grid-column:1/-1;color:var(--muted);font-size:.95rem}
+.work summary::after{content:"+";grid-column:2;grid-row:1;justify-self:end;font:500 1.6rem var(--display);transition:transform .2s}
+.work summary .yr{display:none}
+.work details[open] summary::after{transform:rotate(45deg)}
+.work details>div{padding:0 0 1.5rem;max-width:42rem;color:var(--muted)}
+.work details>div b{color:var(--ink);font-weight:600}
+.about{display:grid;grid-template-columns:1.3fr 1fr;gap:3rem}
+.about p{margin:0 0 1rem;max-width:36rem}
+.facts{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.5rem;align-self:start}
+.facts h3{margin:0 0 .75rem;font:800 1.1rem var(--display)}
+.facts ul{margin:0;padding:0;list-style:none}
+.facts li{padding:.5rem 0;border-top:1px solid var(--line)}
+.facts li:first-child{border-top:0}
+.facts span{display:block;color:var(--muted);font-size:.9rem}
+.contact{padding-bottom:4rem}
+.contact p{max-width:34rem;color:var(--muted)}
+.contact .mail{font:800 clamp(1.5rem,5vw,3rem) var(--display);letter-spacing:-.02em;text-decoration:underline;text-decoration-color:var(--mark);text-decoration-thickness:6px;text-underline-offset:6px;word-break:break-all}
+footer{border-top:1px solid var(--line);padding:1.5rem 0;color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+@media (max-width:760px){.about{grid-template-columns:1fr;gap:2rem}.nav nav a.hide{display:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="nav">
+    <a class="logo" href="#top">Maya Okafor</a>
+    <nav>
+      <a class="hide" href="#work">Work</a>
+      <a class="hide" href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <button id="theme" type="button" aria-label="Switch color theme">Theme</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <h1>I turn messy data into clear pictures.</h1>
+      <p class="lead">I'm a data visualization developer. I build charts, maps, and dashboards that help newsrooms, researchers, and city teams see what their numbers say.</p>
+      <div class="btns">
+        <a class="btn" href="#work">See my work</a>
+        <a class="btn ghost" href="#contact">Get in touch</a>
+      </div>
+      <canvas id="viz" role="img" aria-label="Animated bar chart that reacts to your pointer"></canvas>
+      <p class="viznote">Move your pointer across the chart.</p>
+    </div>
+
+    <section id="work" class="work">
+      <h2>Selected work</h2>
+      <details open>
+        <summary><h3>Rainfall Atlas</h3><span class="tag">Interactive map for the Mumbai Climate Desk, 2025</span></summary>
+        <div><p>A ward-by-ward map of 30 years of monsoon rainfall. Readers drag a timeline and watch flood-prone areas change. <b>Built with</b> D3, MapLibre, and a small Node data pipeline. It was embedded in 14 regional news sites.</p></div>
+      </details>
+      <details>
+        <summary><h3>Commute Lines</h3><span class="tag">Transit dashboard for a city planning team, 2024</span></summary>
+        <div><p>A live dashboard that compares train, bus, and ferry delays across routes. Planners filter by hour and see the worst stretches first. <b>Built with</b> TypeScript, Observable Plot, and Postgres. It replaced a 40-tab spreadsheet.</p></div>
+      </details>
+      <details>
+        <summary><h3>Small Numbers</h3><span class="tag">Personal project: a visual diary, ongoing</span></summary>
+        <div><p>Every week I chart one tiny measurement from my life, such as cups of chai, steps to the station, or unread emails. <b>Built with</b> plain HTML, SVG, and a lot of curiosity.</p></div>
+      </details>
+    </section>
+
+    <section id="about">
+      <h2>About</h2>
+      <div class="about">
+        <div>
+          <p>I started as a journalist who kept getting stuck on spreadsheets. Learning to code let me show readers what I was seeing.</p>
+          <p>Now I work with small teams from first sketch to launch. I care about charts that are honest, readable on a phone, and usable with a keyboard or screen reader.</p>
+        </div>
+        <aside class="facts">
+          <h3>Quick facts</h3>
+          <ul>
+            <li>Based in<span>Mumbai, India</span></li>
+            <li>Tools<span>JavaScript, D3, SVG, Python</span></li>
+            <li>Available<span>From January, for 2 projects</span></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Let's work together</h2>
+      <p>Tell me about your data and who needs to understand it. I reply within two working days.</p>
+      <p><a class="mail" href="mailto:hello@mayaokafor.example">hello@mayaokafor.example</a></p>
+      <button class="btn ghost" id="copy" type="button">Copy email address</button>
+      <span id="copied" role="status" aria-live="polite" style="margin-left:.75rem;color:var(--muted)"></span>
+    </section>
+  </main>
+</div>
+<footer><div class="wrap"><span>© 2026 Maya Okafor</span><a href="#top">Back to top</a></div></footer>
+
+<script>
+(function(){
+  /* Theme toggle */
+  var root=document.documentElement,btn=document.getElementById('theme');
+  btn.addEventListener('click',function(){
+    var dark=root.getAttribute('data-theme')?root.getAttribute('data-theme')==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+    root.setAttribute('data-theme',dark?'light':'dark');
+  });
+
+  /* Copy email */
+  document.getElementById('copy').addEventListener('click',function(){
+    var out=document.getElementById('copied'),mail='hello@mayaokafor.example';
+    function ok(){out.textContent='Copied';setTimeout(function(){out.textContent=''},2000)}
+    if(navigator.clipboard){navigator.clipboard.writeText(mail).then(ok,function(){out.textContent='Copy failed. Select the address above.'})}
+    else{out.textContent='Copy not available. Select the address above.'}
+  });
+
+  /* Hero bar chart */
+  var c=document.getElementById('viz'),ctx=c.getContext('2d');
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var W,H,N=0,mx=-999,t=0,dpr=Math.min(devicePixelRatio||1,2);
+  function css(v){return getComputedStyle(root).getPropertyValue(v).trim()}
+  function size(){
+    var r=c.getBoundingClientRect();W=r.width;H=r.height;
+    c.width=W*dpr;c.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    N=Math.max(14,Math.floor(W/22));draw();
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    var ink=css('--ink'),accent=css('--accent'),mark=css('--mark');
+    var gap=6,bw=(W-gap*(N-1))/N;
+    for(var i=0;i<N;i++){
+      var x=i*(bw+gap),cx=x+bw/2;
+      var base=.35+.25*Math.sin(i*.5+t)+.15*Math.sin(i*.17-t*.7);
+      var d=Math.abs(cx-mx),boost=Math.max(0,1-d/110);
+      var h=Math.max(6,(base+boost*.35)*H*.92);
+      ctx.fillStyle=boost>.55?mark:(boost>.05?accent:ink);
+      ctx.globalAlpha=boost>.05?1:.85;
+      ctx.fillRect(x,H-h,bw,h);
+    }
+    ctx.globalAlpha=1;
+  }
+  function loop(){t+=.012;draw();requestAnimationFrame(loop)}
+  c.addEventListener('pointermove',function(e){mx=e.clientX-c.getBoundingClientRect().left;if(reduce)draw()});
+  c.addEventListener('pointerleave',function(){mx=-999;if(reduce)draw()});
+  addEventListener('resize',size);
+  matchMedia('(prefers-color-scheme:dark)').addEventListener('change',draw);
+  btn.addEventListener('click',function(){setTimeout(draw,0)});
+  size();
+  if(!reduce)loop();
+})();
+</script>
+</body>
+</html>
